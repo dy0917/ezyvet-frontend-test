@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {toDecimal} from '../utils/common';
-import {REMOVE_PRODUCT, SET_CART} from '../actions/cartActions';
+import {removeProduct, setCart} from '../actions/cartActions';
 import _ from 'lodash';
 
 class Cart extends React.Component {
@@ -72,11 +72,11 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeProduct: (p) =>{ 
-      dispatch({ type: REMOVE_PRODUCT, product: p })
+    removeProduct: (product) =>{ 
+      dispatch(removeProduct(product))
     },
     setCart:(cart)=>{
-      dispatch({ type: SET_CART, cart })
+      dispatch(setCart(cart))
     }
   }
 }

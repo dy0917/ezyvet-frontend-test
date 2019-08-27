@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {ADD_PRODUCT, SET_CART} from '../actions/cartActions';
+import {setCart, addProductAsync} from '../actions/cartActions';
 import {toDecimal} from '../utils/common';
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 class Products extends React.Component {
   addClick = async(e, p) => {
     e.stopPropagation(); //stop init adding item
-    await sleep(100);
     this.props.addProduct(p);
   }
   componentDidUpdate() {
@@ -47,18 +45,18 @@ class Products extends React.Component {
   }
 }
 
+
 const mapStateToProps=(state)=>{
     return {...state}
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addProduct:async(p)=>{ 
-      await sleep(10);
-      dispatch({ type: ADD_PRODUCT, product: p });
+    addProduct:(product)=>{
+      dispatch(addProductAsync(product));
     },
     setCart:(cart)=>{
-      dispatch({ type: SET_CART, cart })
+      setCart(cart);
     }
   }
 }
