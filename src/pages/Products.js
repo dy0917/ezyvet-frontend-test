@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 
 
 class Products extends React.Component {
-    constructor(props){
-        super(props);
-        console.log(props);
-    }
     render() {
         return (
             <div className="container">
