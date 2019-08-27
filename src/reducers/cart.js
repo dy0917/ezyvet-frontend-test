@@ -14,8 +14,7 @@ const cartReducer= (state = initialState, action)=>{
             //remove the index of the select product from store
             return state.filter((_, i) => i !== index);
         case SET_CART:
-            state = action.cart;
-            return state;
+            return action.cart;
         default:
             return state;
     }
