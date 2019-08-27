@@ -1,16 +1,39 @@
 import React from 'react';
 import Routes from './routes'
+import { connect } from 'react-redux';
 import {BrowserRouter } from 'react-router-dom';
+import {SET_CART} from './actions/cartActions';
 import Nav from "./components/Nav"
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-      <Nav/>
-      <Routes/>
-      </BrowserRouter>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    this.props.setCart(cart);
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <BrowserRouter>
+        <Nav/>
+        <Routes/>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps=(state)=>{
+  return {...state}
+}
+
+const mapDispatchToProps = dispatch => {
+return {
+  setCart:(cart)=>{
+    dispatch({ type: SET_CART, cart })
+  }
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
