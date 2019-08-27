@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes'
+import { connect } from 'react-redux';
+import {BrowserRouter } from 'react-router-dom';
+import {SET_CART} from './actions/cartActions';
+import Nav from "./components/Nav"
+class App extends React.Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  constructor(props){
+    super(props);
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    this.props.setCart(cart);
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <BrowserRouter>
+        <Nav/>
+        <Routes/>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps=(state)=>{
+  return {...state}
+}
+
+const mapDispatchToProps = dispatch => {
+return {
+  setCart:(cart)=>{
+    dispatch({ type: SET_CART, cart })
+  }
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

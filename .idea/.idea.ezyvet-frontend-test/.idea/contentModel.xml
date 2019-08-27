@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_ezyvet-frontend-test.1038543838.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="node_modules" t="ExcludeRecursive">
+        <e p="@babel/parser" t="IncludeRecursive" />
+        <e p="@babel/types" t="IncludeRecursive" />
+        <e p="@types" t="IncludeRecursive">
+          <e p="babel__generator" t="IncludeRecursive" />
+          <e p="babel__template" t="IncludeRecursive" />
+          <e p="babel__traverse" t="IncludeRecursive" />
+          <e p="istanbul-lib-coverage" t="IncludeRecursive" />
+          <e p="istanbul-lib-report" t="IncludeRecursive" />
+          <e p="yargs-parser" t="IncludeRecursive" />
+        </e>
+        <e p="bootstrap" t="IncludeRecursive" />
+        <e p="react" t="IncludeRecursive" />
+        <e p="react-bootstrap" t="IncludeRecursive" />
+        <e p="react-dom" t="IncludeRecursive" />
+        <e p="react-redux" t="IncludeRecursive" />
+        <e p="react-route" t="IncludeRecursive" />
+        <e p="react-router-dom" t="IncludeRecursive" />
+        <e p="react-scripts" t="IncludeRecursive" />
+        <e p="redux" t="IncludeRecursive" />
+        <e p="redux-devtools" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
