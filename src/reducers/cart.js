@@ -9,11 +9,12 @@ const cartReducer= (state = initialState, action)=>{
               action.product
             ]
         case REMOVE_PRODUCT:
+            //find index of the select product
             const index = state.findIndex(item => item.name === action.product.name);
+            //remove the index of the select product from store
             return state.filter((_, i) => i !== index);
         case SET_CART:
-            state = action.cart;
-            return state;
+            return action.cart;
         default:
             return state;
     }

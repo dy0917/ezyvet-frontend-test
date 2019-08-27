@@ -8,8 +8,16 @@ class App extends React.Component {
 
   constructor(props){
     super(props);
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    this.props.setCart(cart);
+      try {
+        //Check is valid json object
+        const cart = JSON.parse(localStorage.getItem('cart'));
+        if(cart){
+          // load cart data from local storage
+          this.props.setCart(cart);
+        }
+      } catch (e) {
+      }
+     
   }
 
   render(){
