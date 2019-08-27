@@ -8,6 +8,7 @@ class App extends React.Component {
 
   constructor(props){
     super(props);
+    // load cart data from local storage
     const cart = JSON.parse(localStorage.getItem('cart'));
     this.props.setCart(cart);
   }
