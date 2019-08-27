@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-
+// https://stackoverflow.com/questions/53766463/redux-remove-one-item-from-cart
 class Cart extends React.Component {
    get newItemsCheapestFirst() {
         
@@ -36,6 +36,7 @@ class Cart extends React.Component {
                             <th scope="row">{i}</th>
                             <td>{p.name}</td>
                             <td>{p.price}</td>
+
                             <td></td>
                           </tr>
                           )
