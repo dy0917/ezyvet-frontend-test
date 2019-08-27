@@ -1,4 +1,4 @@
-const initialState = {products:[
+const initialState = [
     {
         name: 'Sledgehammer',
         price: 125.75
@@ -19,7 +19,7 @@ const initialState = {products:[
         price: 18.45
 
     }
-]};
+];
 
 const productReducer= (state = initialState, action)=>{
     switch (action.type) {
