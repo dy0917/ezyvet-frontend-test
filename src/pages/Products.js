@@ -1,15 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import {ProductContext} from "../contexts/ProductContext"
 import {CartContext} from "../contexts/CartContext"
 import { toDecimal } from "../utils/common";
 
- class Products extends React.Component {
-  render() {
-     return(
-      <ProductContext.Consumer>{(productsContext) => (
-        <CartContext.Consumer>{(cartContext) => {
-          const {products} = productsContext;
-          const {addProduct} = cartContext;
+ export default function Products() {
+          const {products} = useContext(ProductContext);
+          const {addProduct} = useContext(CartContext);
           return (
       <div className="container">
         <h4 className="align-content-center">Products</h4>
@@ -43,13 +39,6 @@ import { toDecimal } from "../utils/common";
           </tbody>
         </table>
       </div>
-          )
-      }}
-      </CartContext.Consumer>
-      )}
-      </ProductContext.Consumer>
-    );
-  }
+     )
+    
 }
-
-export default Products;

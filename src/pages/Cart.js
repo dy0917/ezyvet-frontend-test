@@ -1,10 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import { toDecimal } from "../utils/common";
 import {CartContext} from "../contexts/CartContext"
 import _ from "lodash";
 
-export default class Cart extends React.Component {
-   groupByProductName(cart) {
+   const groupByProductName=(cart) =>{
           // group up product by their names
           // Map these group into an object has name, price, and a list a product
           const groupsOfProduct = _.chain(cart)
@@ -17,12 +16,10 @@ export default class Cart extends React.Component {
             .value();
           return groupsOfProduct;
         }
+export default function Cart() {
 
-  render() {
+  const {cart,removeProduct} = useContext(CartContext);
     return (
-      <CartContext.Consumer>{(cartContext) => {
-        const {cart,removeProduct} = cartContext;
-        return (
       <div className="container">
         <h4 className="align-content-center">Cart</h4>
         <table className="table">
@@ -37,7 +34,7 @@ export default class Cart extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.groupByProductName(cart).map((p, i) => {
+            {groupByProductName(cart).map((p, i) => {
               return (
                 <tr key={i}>
                   <th scope="row">{i}</th>
@@ -65,9 +62,8 @@ export default class Cart extends React.Component {
           </tbody>
         </table>
       </div>
+     
+
         )
-      }}</CartContext.Consumer>
-    );
-  }
 }
 
