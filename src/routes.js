@@ -1,6 +1,5 @@
 import React from "react";
-import {Route, Switch, Router} from "react-router-dom";
-// import ContextRouter from './router/contextRouter'
+import {Route, Switch} from "react-router-dom";
 import { Cart, Products } from "./pages";
 
 const createRoutes = () => (
