@@ -1,19 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
-import { setCart, addProductAsync } from "../actions/cartActions";
+import {ProductContext} from "../contexts/ProductContext"
+import {CartContext} from "../contexts/CartContext"
 import { toDecimal } from "../utils/common";
 
-class Products extends React.Component {
-  addClick = async (e, p) => {
-    e.stopPropagation(); //stop init adding item
-    await this.props.addProduct(p);
-  };
-  componentDidUpdate() {
-    localStorage.setItem("cart", JSON.stringify(this.props.cart));
-  }
-
+ class Products extends React.Component {
   render() {
-    return (
+     return(
+      <ProductContext.Consumer>{(productsContext) => (
+        <CartContext.Consumer>{(cartContext) => {
+          const {products} = productsContext;
+          const {addCart} = cartContext;
+          return (
       <div className="container">
         <h4 className="align-content-center">Products</h4>
         <table className="table">
@@ -26,17 +23,16 @@ class Products extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.products.map((p, i) => {
+          {products.map((p, i) => {
               return (
                 <tr key={i}>
                   <th scope="row">{i}</th>
                   <td>{p.name}</td>
                   <td>{toDecimal(p.price)}</td>
                   <td>
-                    {" "}
                     <button
                       className="btn btn-sm"
-                      onClick={e => this.addClick(e, p)}
+                      onClick={e => addCart(p)}
                     >
                       Add
                     </button>
@@ -47,26 +43,13 @@ class Products extends React.Component {
           </tbody>
         </table>
       </div>
+          )
+      }}
+      </CartContext.Consumer>
+      )}
+      </ProductContext.Consumer>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return { ...state };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addProduct: product => {
-      return dispatch(addProductAsync(product));
-    },
-    setCart: cart => {
-      setCart(cart);
-    }
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Products);
+export default Products;
