@@ -9,7 +9,7 @@ import { toDecimal } from "../utils/common";
       <ProductContext.Consumer>{(productsContext) => (
         <CartContext.Consumer>{(cartContext) => {
           const {products} = productsContext;
-          const {addCart} = cartContext;
+          const {addProduct} = cartContext;
           return (
       <div className="container">
         <h4 className="align-content-center">Products</h4>
@@ -32,7 +32,7 @@ import { toDecimal } from "../utils/common";
                   <td>
                     <button
                       className="btn btn-sm"
-                      onClick={e => addCart(p)}
+                      onClick={e => addProduct(p)}
                     >
                       Add
                     </button>

@@ -21,21 +21,8 @@ export default class Cart extends React.Component {
   render() {
     return (
       <CartContext.Consumer>{(cartContext) => {
-        const {cart} = cartContext;
+        const {cart,removeProduct} = cartContext;
         return (
-        //  groupByProductName() {
-        //   // group up product by their names
-        //   // Map these group into an object has name, price, and a list a product
-        //   const groupsOfProduct = _.chain(this.props.cart)
-        //     .groupBy("name")
-        //     .map((value, key) => ({
-        //       name: key,
-        //       price: value[0].price,
-        //       products: value
-        //     }))
-        //     .value();
-        //   return groupsOfProduct;
-        // }
       <div className="container">
         <h4 className="align-content-center">Cart</h4>
         <table className="table">
@@ -59,10 +46,9 @@ export default class Cart extends React.Component {
                   <td>{p.products.length}</td>
                   <td>{toDecimal(_.sumBy(p.products, "price"))}</td>
                   <td>
-                    {" "}
                     <button
                       className="btn btn-sm"
-                      onClick={e => this.removeClick(e, p)}
+                      onClick={e=>{removeProduct(p)}}
                     >
                       Remove
                     </button>

@@ -1,10 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import {CartContext} from "../contexts/CartContext"
 import { Link } from "react-router-dom";
 
-class Nav extends React.Component {
+export default class Nav extends React.Component {
   render() {
     return (
+      <CartContext.Consumer>{(cartContext) => {
+        const {cart} = cartContext;
+        return (
       <nav className="navbar navbar-expand-md navbar-light bg-light">
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
@@ -17,19 +20,16 @@ class Nav extends React.Component {
               <Link to="/Cart" className="nav-link">
                 Cart
                 <span className="badge badge-light">
-                  {this.props.cart.length}
+                  {cart.length}
                 </span>
               </Link>
             </li>
           </ul>
         </div>
       </nav>
+        )
+      }}
+        </CartContext.Consumer>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return { ...state };
-};
-
-export default connect(mapStateToProps)(Nav);

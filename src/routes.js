@@ -7,9 +7,7 @@ const createRoutes = () => (
 <Switch>
     <Route exact path="/" component={Products} />
     <Route exact path="/cart" component={Cart} />
-  </Switch>
-
-
+</Switch>
 );
 
 export default createRoutes;
