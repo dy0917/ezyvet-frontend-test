@@ -8,13 +8,13 @@ class CartContextProvider extends Component {
     cart:[
     ]
   }
-  addProduct = async(product) => {
+  addProduct = async( product) => {
     const joined = this.state.cart.concat(product);
     await sleep(10);
     this.setState({ cart: joined });
   }
 
-  removeProduct=(product)=>{
+  removeProduct=async (product)=>{
     const index = this.state.cart.findIndex(item => item.name === product.name);
     //remove the index of the select product from store
     const newCart=  this.state.cart.filter((_, i) => i !== index);
