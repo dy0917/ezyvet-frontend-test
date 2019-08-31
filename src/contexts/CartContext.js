@@ -13,7 +13,6 @@ class CartContextProvider extends Component {
   }
 
   removeProduct=(product)=>{
-    
     const index = this.state.cart.findIndex(item => item.name === product.name);
     //remove the index of the select product from store
     const newCart=  this.state.cart.filter((_, i) => i !== index);
