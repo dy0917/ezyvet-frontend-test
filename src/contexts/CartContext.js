@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export const CartContext = createContext();
 
 class CartContextProvider extends Component {
@@ -7,8 +8,9 @@ class CartContextProvider extends Component {
     cart:[
     ]
   }
-  addProduct = (product) => {
+  addProduct = async(product) => {
     const joined = this.state.cart.concat(product);
+    await sleep(10);
     this.setState({ cart: joined });
   }
 
@@ -16,6 +18,7 @@ class CartContextProvider extends Component {
     const index = this.state.cart.findIndex(item => item.name === product.name);
     //remove the index of the select product from store
     const newCart=  this.state.cart.filter((_, i) => i !== index);
+    await sleep(10);
     this.setState({ cart: newCart });
   }
 
