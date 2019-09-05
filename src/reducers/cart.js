@@ -1,5 +1,7 @@
 import { ADD_PRODUCT, REMOVE_PRODUCT, SET_CART } from "../actions/cartActions";
-const initialState = [];
+import { loadState } from "../localStorage";
+const state =loadState();
+const initialState = state&&state.state.cart ? state.state.cart : [];
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {

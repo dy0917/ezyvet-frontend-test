@@ -24,10 +24,6 @@ class Cart extends React.Component {
     this.props.removeProduct(p);
   };
 
-  componentDidUpdate() {
-    localStorage.setItem("cart", JSON.stringify(this.props.cart));
-  }
-
   render() {
     return (
       <div className="container">
