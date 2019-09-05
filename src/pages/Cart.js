@@ -1,30 +1,30 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createSelector } from 'reselect'
 import { toDecimal } from "../utils/common";
-import { removeProduct, setCart } from "../actions/cartActions";
+import { removeProduct } from "../actions/cartActions";
 import _ from "lodash";
 
-class Cart extends React.Component {
-  get groupByProductName() {
-    // group up product by their names
-    // Map these group into an object has name, price, and a list a product
-    const groupsOfProduct = _.chain(this.props.cart)
-      .groupBy("name")
-      .map((value, key) => ({
-        name: key,
-        price: value[0].price,
-        products: value
-      }))
-      .value();
-    return groupsOfProduct;
-  }
+const groupByProductName =
+  createSelector(
+    cart => cart,
+    (cart) => {
+      return _.chain(cart)
+        .groupBy("name")
+        .map((value, key) => ({
+          name: key,
+          price: value[0].price,
+          products: value
+        }))
+        .value()
+      }
+  )
 
-  removeClick = (e, p) => {
-    e.stopPropagation(); //stop init adding item
-    this.props.removeProduct(p);
-  };
+export default ()=> {
+  const cart = useSelector(state => state.cart);
+  const productGroups = useSelector(state=>groupByProductName(state.cart))
 
-  render() {
+  const dispatch = useDispatch();
     return (
       <div className="container">
         <h4 className="align-content-center">Cart</h4>
@@ -40,7 +40,7 @@ class Cart extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.groupByProductName.map((p, i) => {
+            {productGroups.map((p, i) => {
               return (
                 <tr key={i}>
                   <th scope="row">{i}</th>
@@ -49,10 +49,10 @@ class Cart extends React.Component {
                   <td>{p.products.length}</td>
                   <td>{toDecimal(_.sumBy(p.products, "price"))}</td>
                   <td>
-                    {" "}
                     <button
                       className="btn btn-sm"
-                      onClick={e => this.removeClick(e, p)}
+                      onClick={e => dispatch(removeProduct(p))
+                      }
                     >
                       Remove
                     </button>
@@ -64,31 +64,11 @@ class Cart extends React.Component {
               <td colSpan="5">
                 <div className="float-right">Total:</div>
               </td>
-              <td>{toDecimal(_.sumBy(this.props.cart, "price"))}</td>
+              <td>{toDecimal(_.sumBy(cart, "price"))}</td>
             </tr>
           </tbody>
         </table>
       </div>
     );
   }
-}
 
-const mapStateToProps = state => {
-  return { ...state };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    removeProduct: product => {
-      dispatch(removeProduct(product));
-    },
-    setCart: cart => {
-      dispatch(setCart(cart));
-    }
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);

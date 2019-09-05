@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, REMOVE_PRODUCT, SET_CART } from "../actions/cartActions";
+import { ADD_PRODUCT, REMOVE_PRODUCT } from "../actions/cartActions";
 import { loadState } from "../localStorage";
 const state =loadState();
 const initialState = state&&state.state.cart ? state.state.cart : [];
@@ -12,8 +12,6 @@ const cartReducer = (state = initialState, action) => {
       const index = state.findIndex(item => item.name === action.product.name);
       //remove the index of the select product from store
       return state.filter((_, i) => i !== index);
-    case SET_CART:
-      return action.cart;
     default:
       return state;
   }

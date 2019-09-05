@@ -1,10 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { setCart, addProductAsync } from "../actions/cartActions";
+import { useSelector, useDispatch } from "react-redux";
+import { addProductAsync } from "../actions/cartActions";
 import { toDecimal } from "../utils/common";
 
 export default () => {
   const products = useSelector(state => state.products);
+  const dispatch = useDispatch();
   return (
     <div className="container">
       <h4 className="align-content-center">Products</h4>
@@ -24,7 +25,14 @@ export default () => {
                 <th scope="row">{i}</th>
                 <td>{p.name}</td>
                 <td>{toDecimal(p.price)}</td>
-                <td></td>
+                <td>
+                    <button
+                      className="btn btn-sm"
+                      onClick={e => dispatch(addProductAsync(p))}
+                    >
+                      Add
+                    </button>
+                </td>
               </tr>
             );
           })}
