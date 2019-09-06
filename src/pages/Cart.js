@@ -23,7 +23,6 @@ const groupByProductName = createSelector(
 export default () => {
   const cart = useSelector(state => state.cart);
   const productGroups = useSelector(state => groupByProductName(state.cart));
-
   const dispatch = useDispatch();
   return (
     <div>

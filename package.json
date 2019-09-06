@@ -9,11 +9,13 @@
     "redux-devtools": "^3.5.0"
   },
   "dependencies": {
+    "@welldone-software/why-did-you-render": "^3.3.3",
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
+    "react-hook-form": "^3.23.3",
     "react-route": "^1.0.3",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",

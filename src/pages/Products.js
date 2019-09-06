@@ -1,12 +1,20 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { addProductAsync } from "../actions/cartActions";
 import { toDecimal } from "../utils/common";
 import Nav from "../components/Nav";
 
+
 export default () => {
   const products = useSelector(state => state.products);
+  const dddfda= "test";
   const dispatch = useDispatch();
+
+  console.log("asdfasdfasdf");
+  useEffect(() => {
+    console.log(dddfda);
+  }, []); 
+
   return (
     <div>
       <Nav></Nav>
