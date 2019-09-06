@@ -1,31 +1,33 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createSelector } from 'reselect'
+import { createSelector } from "reselect";
 import { toDecimal } from "../utils/common";
 import { removeProduct } from "../actions/cartActions";
+import Nav from "../components/Nav";
 import _ from "lodash";
 
-const groupByProductName =
-  createSelector(
-    cart => cart,
-    (cart) => {
-      return _.chain(cart)
-        .groupBy("name")
-        .map((value, key) => ({
-          name: key,
-          price: value[0].price,
-          products: value
-        }))
-        .value()
-      }
-  )
+const groupByProductName = createSelector(
+  cart => cart,
+  cart => {
+    return _.chain(cart)
+      .groupBy("name")
+      .map((value, key) => ({
+        name: key,
+        price: value[0].price,
+        products: value
+      }))
+      .value();
+  }
+);
 
-export default ()=> {
+export default () => {
   const cart = useSelector(state => state.cart);
-  const productGroups = useSelector(state=>groupByProductName(state.cart))
+  const productGroups = useSelector(state => groupByProductName(state.cart));
 
   const dispatch = useDispatch();
-    return (
+  return (
+    <div>
+      <Nav></Nav>
       <div className="container">
         <h4 className="align-content-center">Cart</h4>
         <table className="table">
@@ -51,8 +53,7 @@ export default ()=> {
                   <td>
                     <button
                       className="btn btn-sm"
-                      onClick={e => dispatch(removeProduct(p))
-                      }
+                      onClick={e => dispatch(removeProduct(p))}
                     >
                       Remove
                     </button>
@@ -69,6 +70,6 @@ export default ()=> {
           </tbody>
         </table>
       </div>
-    );
-  }
-
+    </div>
+  );
+};
