@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addProductAsync } from "../actions/cartActions";
 import { toDecimal } from "../utils/common";
 
 export default () => {
-  const products = useSelector(state => state.products);
-//   const dispatch = useDispatch();
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    
   return (
     <div class="container">
     <div class="row">
@@ -13,9 +15,12 @@ export default () => {
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin">
+            <form class="form-signin"  onSubmit={e => {
+        e.preventDefault();
+        // Auth handler
+      }}>
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus/>
+                <input type="email" class="form-control" placeholder="Email address" onChange={e => setEmail(e.target.value)} required autofocus/>
                 <label for="inputEmail">Email address</label>
               </div>
     
