@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useForm from "react-hook-form";
-// import { useSelector, useDispatch } from "react-redux";
-// import { addProductAsync } from "../actions/cartActions";
-// import { toDecimal } from "../utils/common";
-
-
+import classNames from "classnames";
+import EmailInput from "../components/Login/EmailInput";
 
 export default () => {
-    // const whyDidYouRender = true;
-  const { register, handleSubmit, errors } = useForm();
-  console.log("Asdfasdfasd");
-  //   const [email, setEmail] = useState();
-  //   const [password, setPassword] = useState();
-  const onSubmit = async data => {
-    console.log(data);
-    // const joined = cart.concat(product);
-    // await sleep(10);
-    // setCart(joined);
-    // localStorage.setItem("cart", JSON.stringify(cart));
+  // const whyDidYouRender = true;
+  const { register, triggerValidation, errors, getValues } = useForm({
+    mode: "onChange"
+  });
+  const [email, setEmail] = useState("");
+  const emailRef = useRef();
+
+  const onSubmit = async () => {
+    const response = emailRef.current.checkValidate();
+    console.log('response', email, response);
+    // const valid = await triggerValidation();
+    // console.log(valid);
   };
-  console.log(errors);
+  const passwordCompare = () => {
+    const { password, repeatpassword } = getValues();
+    return password === repeatpassword;
+  };
   return (
     <div className="container">
       <div className="row">
@@ -27,34 +28,57 @@ export default () => {
           <div className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Sign In</h5>
-              <form className="form-signin" onSubmit={
-                //   e.preventDefault();
-                  handleSubmit(onSubmit)
-                  }>
-                <div className="form-label-group">
-                  <label htmlFor="inputEmail">Email address</label>
-                  <input
-                    className="form-control"
-                    placeholder="Email address"
-                    name="email"
-                    ref={register({
-                      required: 'error message',
-                      pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})}
-                    autoFocus
-                  />
-                </div>
+              <form
+                className="form-signin"
+                onSubmit={e => {
+                  e.preventDefault();
+                  onSubmit();
+                }}
+              >
+                <EmailInput
+                  email={email}
+                  onSetEmail={setEmail}
+                  ref={emailRef}
+                />
 
-                {errors.email && errors.email.message}
-                <div className="form-label-group">
+                <div
+                  className={classNames("form-label-group", {
+                    "text-danger": errors.password
+                  })}
+                >
                   <label htmlFor="inputPassword">Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className={classNames("form-control", {
+                      "is-invalid": errors.password
+                    })}
                     name="password"
                     placeholder="Password"
-                    ref={register({ required: true })}
+                    ref={register({ required: "Password is required" })}
                   />
                 </div>
+                {errors.password && errors.password.message}
+
+                <div
+                  className={classNames("form-label-group", {
+                    "text-danger": errors.repeatpassword
+                  })}
+                >
+                  <label htmlFor="inputPassword">Confirm Password</label>
+                  <input
+                    type="password"
+                    className={classNames("form-control", {
+                      "is-invalid": errors.repeatpassword
+                    })}
+                    name="repeatpassword"
+                    placeholder="Password"
+                    ref={register({
+                      required: "Repeat Password is required",
+                      validate: passwordCompare
+                    })}
+                  />
+                </div>
+                {errors.repeatpassword && errors.repeatpassword.message}
 
                 <div className="custom-control custom-checkbox mb-3">
                   <input
@@ -69,15 +93,12 @@ export default () => {
                     Remember password
                   </label>
                 </div>
-                <button
+                <input
                   className="btn btn-lg btn-primary btn-block text-uppercase"
                   type="submit"
-                >
-                  Sign in
-                </button>
+                  value="login"
+                />
                 <hr className="my-4" />
-                {/* <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> */}
               </form>
             </div>
           </div>

@@ -7,14 +7,7 @@ import Nav from "../components/Nav";
 
 export default () => {
   const products = useSelector(state => state.products);
-  const dddfda= "test";
   const dispatch = useDispatch();
-
-  console.log("asdfasdfasdf");
-  useEffect(() => {
-    console.log(dddfda);
-  }, []); 
-
   return (
     <div>
       <Nav></Nav>
